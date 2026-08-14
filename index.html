@@ -1,0 +1,542 @@
+<!DOCTYPE html><html lang="en" data-theme="salon"><head><!-- Restores a saved bozu-salon light/dark preference (see
+         components/bozu-salon/BazuLangSwitch.astro's own theme toggle)
+         before first paint, so a returning visitor doesn't see a flash
+         of the page's default theme before JS swaps it later. Inline
+         and first in <head> so it runs before the stylesheet import
+         above resolves against the DOM.
+
+         `localStorage` is shared across the entire origin, not scoped
+         to a subpath — an earlier version of this script only checked
+         the *saved value*, on the assumption that other pages "never
+         have this key set" and would therefore no-op. Wrong: once a
+         visitor toggles dark mode on any båzu frisør page, that key
+         stays set in their browser for the whole site, so every other
+         page's own load picked it up too and got force-switched into
+         bozu-salon-dark's colors — including pages with a completely
+         different theme, or no theme at all (the homepage gallery).
+         Checking this page's own *current* `data-theme` first (the
+         value BaseLayout's own `theme` prop already rendered into the
+         DOM above) closes that: this only ever restores the saved
+         preference on a page that already opted into the bozu-salon
+         family to begin with, and is an inert no-op everywhere else,
+         regardless of what's sitting in localStorage. --><script>
+      (function () {
+        try {
+          var current = document.documentElement.getAttribute("data-theme");
+          if (current !== "bozu-salon" && current !== "bozu-salon-dark") return;
+          var saved = localStorage.getItem("bazu-theme");
+          if (saved === "bozu-salon" || saved === "bozu-salon-dark") {
+            document.documentElement.setAttribute("data-theme", saved);
+          }
+        } catch (e) {}
+      })();
+    </script><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="description" content="Studio Negl er et lite, personlig neglestudio i Oslo sentrum. Se tjenester og priser, og bestill time."><link rel="icon" type="image/svg+xml" href="/studio-negl/favicon.svg"><title>Studio Negl — Neglesalong i Oslo</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><!-- Font families pulled in once, up front, for every theme currently
+         scaffolded (medical-clinic, pop-teen, freelance-portfolio, salon).
+         Extend this list as new themes are added. Momo Trust Display only
+         ships one weight (400) on Google Fonts — no `:wght@` range to
+         request for it. (Baloo 2 dropped: it was only ever pop-teen's old
+         display font, now replaced by Momo Trust Display, and nothing
+         else references it.) freelance-portfolio's own pairing is EB
+         Garamond (display, italic accent word in its hero) + Ysabeau
+         (heading — EB Garamond's own sans-serif companion typeface, same
+         proportions/personality by design) + IBM Plex Sans (body — split
+         back out from Ysabeau at the user's request, for long-form body
+         copy legibility) + DM Mono (`--font-mono`: tracked-caps eyebrow
+         labels only) + Source Code Pro (`--font-number`: numeric/price
+         figures specifically — the user picked it for its dotted zero,
+         a legibility cue that matters for digits but not for label
+         text, which is why this is a separate key from `--font-mono`
+         rather than swapping DM Mono out everywhere). Fraunces stays
+         upright-only (medical-clinic's own display font, never used
+         italic) now that freelance-portfolio's italic need moved to EB
+         Garamond; JetBrains Mono dropped — freelance-portfolio was its
+         only consumer. salon (Neglesalong/"Studio Negl" sample) adds
+         Marcellus (display, single weight only) + Jost (heading, weights
+         400/500) + Manrope (body, weights 400/500/600, swapped in for
+         Inter — reuses DM Mono/Source Code Pro rather than pulling in a
+         second new family for mono/number). bozu-salon (ported "båzu
+         frisør" sample) adds Space Grotesk (body, weights 300–700) —
+         its display/heading font, Recia, isn't on Google Fonts at all
+         (it's a Fontshare-only serif), hence the separate stylesheet
+         link below rather than one more family on this same request. --><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Sora:wght@500;600&family=Inter:wght@400;500&family=Poppins:wght@500;600&family=Nunito:wght@400;600;700&family=Momo+Trust+Display&family=EB+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Ysabeau:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&family=DM+Mono:wght@400;500&family=Source+Code+Pro:wght@400;600&family=Marcellus&family=Jost:wght@400;500&family=Manrope:wght@400;500;600&family=Space+Grotesk:wght@300..700&display=swap"><!-- Recia (bozu-salon's display/heading font) ships from Fontshare,
+         not Google Fonts — same as the source "båzu frisør" prototype's
+         own <link>. --><link rel="preconnect" href="https://api.fontshare.com"><link href="https://api.fontshare.com/v2/css?f[]=recia@400,700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/studio-negl/_astro/BaseLayout.BhGutm2X.css"><link rel="stylesheet" href="/studio-negl/_astro/ScrollReveal.CtmIAqfl.css"><link rel="stylesheet" href="/studio-negl/_astro/Section.D3Ok13Pf.css"><link rel="stylesheet" href="/studio-negl/_astro/TestimonialStack.Bbd3ZHex.css"><style>.profile-section[data-astro-cid-z2lwti7q]{padding-block:var(--space-2xl)}.profile-section__inner[data-astro-cid-z2lwti7q]{max-width:1180px;padding-inline:var(--space-lg);gap:var(--space-xl);margin-inline:auto;display:grid}.profile-section__monogram[data-astro-cid-z2lwti7q]{aspect-ratio:1;border-radius:var(--radius-card);background:var(--color-bg-alt);border:var(--card-border-width) var(--card-border-style,solid) var(--card-border-color);width:140px;font-family:var(--font-display);font-size:var(--font-size-3xl);letter-spacing:.02em;color:var(--color-primary);justify-content:center;align-items:center;display:flex}.profile-section__photo[data-astro-cid-z2lwti7q]{aspect-ratio:1;border-radius:var(--radius-card);object-fit:cover;width:140px;display:block}.profile-section--photo[data-astro-cid-z2lwti7q] .profile-section__photo[data-astro-cid-z2lwti7q]{width:240px}.profile-section__content[data-astro-cid-z2lwti7q] .eyebrow{--eyebrow-margin:0 0 var(--space-xs);--eyebrow-font-family:var(--font-heading);--eyebrow-font-weight:600;--eyebrow-letter-spacing:.08em;--eyebrow-color:var(--color-accent)}.profile-section__name[data-astro-cid-z2lwti7q]{font-family:var(--font-display);font-size:var(--font-size-2xl);color:var(--color-ink);margin:0}.profile-section__role[data-astro-cid-z2lwti7q]{margin:var(--space-xs) 0 var(--space-md);font-family:var(--font-heading);color:var(--color-ink-soft)}.profile-section__bio[data-astro-cid-z2lwti7q]{margin:0 0 var(--space-lg);max-width:60ch;color:var(--color-ink-soft)}.profile-section__credentials[data-astro-cid-z2lwti7q]{gap:var(--space-sm);flex-direction:column;max-width:60ch;margin:0;padding:0;list-style:none;display:flex}.profile-section__credentials[data-astro-cid-z2lwti7q] li[data-astro-cid-z2lwti7q]{padding-left:var(--space-lg);color:var(--color-ink);position:relative}.profile-section__credentials[data-astro-cid-z2lwti7q] li[data-astro-cid-z2lwti7q]:before{content:"";border-radius:var(--radius-full);background:var(--color-accent);width:8px;height:8px;position:absolute;top:.5em;left:0}@media (width>=1024px){.profile-section__inner[data-astro-cid-z2lwti7q]{grid-template-columns:200px minmax(0,1fr);align-items:start}.profile-section--photo[data-astro-cid-z2lwti7q] .profile-section__inner[data-astro-cid-z2lwti7q]{grid-template-columns:240px minmax(0,1fr)}.profile-section__portrait-col[data-astro-cid-z2lwti7q]{top:var(--space-2xl);position:sticky}}
+</style><link rel="stylesheet" href="/studio-negl/_astro/Button.DtWoJWHU.css"><link rel="stylesheet" href="/studio-negl/_astro/Eyebrow.XNsAS7TE.css"><style>.inline-cta-banner[data-astro-cid-fzzqim4j]{gap:var(--space-md);padding:var(--space-xl) var(--space-lg);background:var(--color-bg-alt);border-radius:var(--radius-card);display:flex}.inline-cta-banner--center[data-astro-cid-fzzqim4j]{text-align:center;flex-direction:column;align-items:center}.inline-cta-banner--space-between[data-astro-cid-fzzqim4j]{flex-wrap:wrap;justify-content:space-between;align-items:center}.inline-cta-banner__actions[data-astro-cid-fzzqim4j]{gap:var(--space-md);flex-wrap:wrap;justify-content:center;display:flex}.inline-cta-banner--space-between[data-astro-cid-fzzqim4j] .inline-cta-banner__actions[data-astro-cid-fzzqim4j]{justify-content:flex-start}.inline-cta-banner__text[data-astro-cid-fzzqim4j] .eyebrow{--eyebrow-margin:0 0 var(--space-xs);--eyebrow-font-size:var(--font-size-xs);--eyebrow-letter-spacing:.04em;--eyebrow-color:var(--color-ink-faint)}.inline-cta-banner__message[data-astro-cid-fzzqim4j]{font-family:var(--font-heading);font-size:var(--font-size-lg);color:var(--color-ink);margin:0}
+.salon-hero-section .section__inner{padding-block:0}.salon-book-section.section--alt-1{background:var(--color-ink)}.salon-book-section .inline-cta-banner{background:var(--color-surface);border:var(--card-border-width) var(--card-border-style,solid) var(--card-border-color);box-shadow:var(--shadow-card)}.salon-book-section .inline-cta-banner .eyebrow{--eyebrow-color:var(--color-ink-soft)}#tilbakemeldinger .testimonial-stack{background:var(--color-accent-soft);color:var(--color-ink)}#tilbakemeldinger .testimonial-stack__eyebrow{color:var(--color-ink-soft)}#tilbakemeldinger .testimonial-stack__divider{background:var(--color-ink-faint)}#tilbakemeldinger .testimonial-stack__arrow{color:var(--color-ink)}#tilbakemeldinger .testimonial-stack__dot{background:var(--color-ink)}.salon-footer.site-footer{background:var(--color-bg-alt);color:var(--color-ink)}.salon-footer .site-footer__bottom{color:var(--color-ink-soft)}.salon-gallery-section.section--base{background:var(--color-ink)}.salon-gallery-intro--dark[data-astro-cid-26623dud] .salon-heading[data-astro-cid-26623dud],.salon-gallery-intro--dark[data-astro-cid-26623dud] .salon-desc[data-astro-cid-26623dud]{color:var(--color-bg)}.salon-gallery-intro--dark[data-astro-cid-26623dud] .salon-desc[data-astro-cid-26623dud]{opacity:.75}.testimonial-stack{border-top:var(--space-xs) solid var(--color-accent)}.salon-heading[data-astro-cid-26623dud]{margin:0 0 var(--space-xs);font-family:var(--font-display);font-size:var(--font-size-2xl);color:var(--color-ink)}.salon-desc[data-astro-cid-26623dud]{margin:0 0 var(--space-xl);max-width:60ch;color:var(--color-ink-soft)}.salon-subheading[data-astro-cid-26623dud]{margin:0 0 var(--space-sm);font-family:var(--font-heading);font-size:var(--font-size-md);letter-spacing:.02em;color:var(--color-accent)}.salon-subheading[data-astro-cid-26623dud]+.price-list{margin-bottom:var(--space-xl)}.salon-gallery-intro[data-astro-cid-26623dud]{padding-inline:var(--space-xl);margin-bottom:var(--space-lg)}
+</style></head><body><header class="site-header site-header--minimal site-header--overlay" data-scroll-threshold="80" data-astro-cid-fzpbxy5g><div class="site-header__inner" data-astro-cid-fzpbxy5g><a href="/studio-negl" class="site-header__brand" data-astro-cid-fzpbxy5g>Studio Negl</a><nav class="site-header__nav" aria-label="Primary" id="site-header-nav-60e22872" data-astro-cid-fzpbxy5g><ul data-astro-cid-fzpbxy5g><li data-astro-cid-fzpbxy5g><a href="#tjenester" data-astro-cid-fzpbxy5g>Tjenester</a></li><li data-astro-cid-fzpbxy5g><a href="#galleri" data-astro-cid-fzpbxy5g>Galleri</a></li><li data-astro-cid-fzpbxy5g><a href="#om" data-astro-cid-fzpbxy5g>Om studioet</a></li></ul></nav><a class="button button--primary button--sm  " href="#book" data-astro-cid-fzpbxy5g="true" data-astro-cid-ekguhzzh="true"><span class="button__icon button__icon--left" aria-hidden="true" data-astro-cid-ekguhzzh></span><span class="button__label" data-astro-cid-ekguhzzh>Bestill time</span><svg class="button__border-reveal" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" data-astro-cid-ekguhzzh><path d="M50 98 L98 98 L98 2 L50 2" pathLength="100" data-astro-cid-ekguhzzh></path><path d="M50 98 L2 98 L2 2 L50 2" pathLength="100" data-astro-cid-ekguhzzh></path></svg></a><button type="button" class="site-header__toggle" aria-expanded="false" aria-controls="site-header-nav-60e22872" aria-label="Menu" data-astro-cid-fzpbxy5g><svg class="site-header__toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" data-astro-cid-fzpbxy5g><path class="site-header__toggle-bar site-header__toggle-bar--top" d="M4 7h16" data-astro-cid-fzpbxy5g></path><path class="site-header__toggle-bar site-header__toggle-bar--mid" d="M4 12h16" data-astro-cid-fzpbxy5g></path><path class="site-header__toggle-bar site-header__toggle-bar--bottom" d="M4 17h16" data-astro-cid-fzpbxy5g></path></svg></button></div></header><script type="module">document.querySelectorAll(`.site-header`).forEach(e=>{if(e.classList.contains(`site-header--overlay`)){let t=Number(e.dataset.scrollThreshold??`80`);function n(){e.classList.toggle(`is-scrolled`,window.scrollY>t)}window.addEventListener(`scroll`,n,{passive:!0}),n()}let t=e.querySelector(`.site-header__toggle`),n=e.querySelector(`.site-header__nav`);if(!t||!n)return;function r(){e.classList.remove(`site-header--menu-open`),t.setAttribute(`aria-expanded`,`false`)}t.addEventListener(`click`,()=>{let n=e.classList.toggle(`site-header--menu-open`);t.setAttribute(`aria-expanded`,String(n))}),n.querySelectorAll(`a`).forEach(e=>{e.addEventListener(`click`,r)}),window.addEventListener(`resize`,()=>{window.innerWidth>=640&&r()})});</script><section class="section section--base section--divider-none section--divider-style-line section--width-full section--align-left section--top-radius-none section--top-shape-double-line salon-hero-section" data-astro-cid-w6ymvdtg><div class="section-divider section-divider--double-line section-divider--accent section-divider--edge-top section-divider--scale-default" aria-hidden="true" data-astro-cid-r46663es><span class="section-divider__line" data-astro-cid-r46663es></span><span class="section-divider__line section-divider__line--second" data-astro-cid-r46663es></span></div><div class="section__inner" data-astro-cid-w6ymvdtg><section class="split-hero split-hero--full-bleed" style="min-height: 80svh;" data-astro-cid-3x4e3iwb><div class="split-hero__blobs" aria-hidden="true" data-astro-cid-3x4e3iwb><span class="split-hero__blob split-hero__blob--a" data-astro-cid-3x4e3iwb></span><span class="split-hero__blob split-hero__blob--b" data-astro-cid-3x4e3iwb></span></div><div class="split-hero__grid" data-astro-cid-3x4e3iwb><div class="split-hero__copy" data-astro-cid-3x4e3iwb><div class="scroll-reveal scroll-reveal--bloom" data-astro-cid-vp2zbptk><p class="eyebrow eyebrow--plain" data-astro-cid-2lydxdhj><span class="eyebrow__label" data-astro-cid-2lydxdhj>Neglesalong i Oslo</span></p></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><script type="module">if(window.matchMedia(`(prefers-reduced-motion: no-preference)`).matches){let e=new IntersectionObserver(t=>{for(let n of t)n.isIntersecting&&(n.target.classList.add(`scroll-reveal--in`),e.unobserve(n.target))},{threshold:.2,rootMargin:`0px 0px -15% 0px`});document.querySelectorAll(`.scroll-reveal`).forEach(t=>e.observe(t))}</script><div class="scroll-reveal scroll-reveal--bloom" style="animation-delay: 120ms" data-astro-cid-vp2zbptk><h1 class="split-hero__title" data-astro-cid-3x4e3iwb>Presisjon, ro og rene linjer</h1></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><div class="scroll-reveal scroll-reveal--bloom" style="animation-delay: 240ms" data-astro-cid-vp2zbptk><p class="split-hero__lede" data-astro-cid-3x4e3iwb>Studio Negl er et lite, personlig neglestudio i sentrum — der godt håndverk og et rolig rom står i sentrum for hver eneste time.</p></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><div class="split-hero__actions" data-astro-cid-3x4e3iwb><div class="scroll-reveal scroll-reveal--bloom" style="animation-delay: 360ms" data-astro-cid-vp2zbptk><a class="button button--primary button--lg  " href="#book" data-astro-cid-3x4e3iwb="true" data-astro-cid-ekguhzzh="true"><span class="button__label" data-astro-cid-ekguhzzh>Bestill time</span><svg class="button__border-reveal" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" data-astro-cid-ekguhzzh><path d="M50 98 L98 98 L98 2 L50 2" pathLength="100" data-astro-cid-ekguhzzh></path><path d="M50 98 L2 98 L2 2 L50 2" pathLength="100" data-astro-cid-ekguhzzh></path></svg></a></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><div class="scroll-reveal scroll-reveal--bloom" style="animation-delay: 480ms" data-astro-cid-vp2zbptk><a class="button button--outline button--lg  " href="#tjenester" data-astro-cid-3x4e3iwb="true" data-astro-cid-ekguhzzh="true"><span class="button__label" data-astro-cid-ekguhzzh>Se tjenester</span><svg class="button__border-reveal" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" data-astro-cid-ekguhzzh><path d="M50 98 L98 98 L98 2 L50 2" pathLength="100" data-astro-cid-ekguhzzh></path><path d="M50 98 L2 98 L2 2 L50 2" pathLength="100" data-astro-cid-ekguhzzh></path></svg></a></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript></div></div><div class="split-hero__visual" data-astro-cid-3x4e3iwb><div class="split-hero__carousel" data-hero-carousel data-hero-interval="3" data-astro-cid-3x4e3iwb><img class="split-hero__image split-hero__slide is-active" src="/studio-negl/_astro/ari-kurniawan-v9agFscJCIE-unsplash.BdP3t7_0_Z2bKQET.webp" alt="Bilder fra Studio Negl — neglearbeid og studioet" loading="eager" data-hero-slide data-astro-cid-3x4e3iwb><img class="split-hero__image split-hero__slide" src="/studio-negl/_astro/or-hakim-GxS92Kl-4DA-unsplash.B7-lJQkK_29R2CC.webp" alt="Bilder fra Studio Negl — neglearbeid og studioet" loading="lazy" data-hero-slide data-astro-cid-3x4e3iwb><img class="split-hero__image split-hero__slide" src="/studio-negl/_astro/kimia-kazemi-FkMeLeKaUEU-unsplash.B6iCZZ_p_18xYDU.webp" alt="Bilder fra Studio Negl — neglearbeid og studioet" loading="lazy" data-hero-slide data-astro-cid-3x4e3iwb></div><div class="split-hero__scrim" aria-hidden="true" data-astro-cid-3x4e3iwb></div></div></div></section><script type="module">window.matchMedia(`(prefers-reduced-motion: no-preference)`).matches&&document.querySelectorAll(`[data-hero-carousel]`).forEach(e=>{let t=Array.from(e.querySelectorAll(`[data-hero-slide]`));if(t.length<2)return;let n=Number(e.dataset.heroInterval??`3`)*1e3,r=0;setInterval(()=>{t[r].classList.remove(`is-active`),r=(r+1)%t.length,t[r].classList.add(`is-active`)},n)});</script></div></section><div id="tjenester" data-astro-cid-26623dud><section class="section section--alt-1 section--divider-top section--divider-style-line section--width-default section--align-left section--top-radius-none" data-astro-cid-w6ymvdtg><div class="section__inner" data-astro-cid-w6ymvdtg><div class="scroll-reveal scroll-reveal--bloom" data-astro-cid-vp2zbptk><h2 class="salon-heading" data-astro-cid-26623dud>Tjenestemeny</h2></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><div class="scroll-reveal scroll-reveal--bloom" style="animation-delay: 120ms" data-astro-cid-vp2zbptk><p class="salon-desc" data-astro-cid-26623dud>Faste priser, ingen overraskelser. Alle behandlinger inkluderer neglebåndspleie og fasong.</p></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><div class="scroll-reveal scroll-reveal--bloom" style="animation-delay: 240ms" data-astro-cid-vp2zbptk><div data-astro-cid-26623dud><h3 class="salon-subheading" data-astro-cid-26623dud>Manikyr</h3><div class="price-list" data-astro-cid-yexifyue><div class="price-list__row" data-astro-cid-yexifyue><span class="price-list__label" data-astro-cid-yexifyue>Klassisk manikyr<span class="price-list__duration" data-astro-cid-yexifyue>45 min</span></span><span class="price-list__price" data-astro-cid-yexifyue>450 kr</span></div><div class="price-list__row" data-astro-cid-yexifyue><span class="price-list__label" data-astro-cid-yexifyue>Gelelakk manikyr<span class="price-list__duration" data-astro-cid-yexifyue>60 min</span></span><span class="price-list__price" data-astro-cid-yexifyue>650 kr</span></div><div class="price-list__row" data-astro-cid-yexifyue><span class="price-list__label" data-astro-cid-yexifyue>Fransk manikyr<span class="price-list__duration" data-astro-cid-yexifyue>60 min</span></span><span class="price-list__price" data-astro-cid-yexifyue>700 kr</span></div><div class="price-list__row" data-astro-cid-yexifyue><span class="price-list__label" data-astro-cid-yexifyue>Neglereparasjon<span class="price-list__duration" data-astro-cid-yexifyue>per negl</span></span><span class="price-list__price" data-astro-cid-yexifyue>Fra 100 kr</span></div></div></div></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><div class="scroll-reveal scroll-reveal--bloom" style="animation-delay: 360ms" data-astro-cid-vp2zbptk><div data-astro-cid-26623dud><h3 class="salon-subheading" data-astro-cid-26623dud>Pedikyr</h3><div class="price-list" data-astro-cid-yexifyue><div class="price-list__row" data-astro-cid-yexifyue><span class="price-list__label" data-astro-cid-yexifyue>Klassisk pedikyr<span class="price-list__duration" data-astro-cid-yexifyue>50 min</span></span><span class="price-list__price" data-astro-cid-yexifyue>550 kr</span></div><div class="price-list__row" data-astro-cid-yexifyue><span class="price-list__label" data-astro-cid-yexifyue>Gelelakk pedikyr<span class="price-list__duration" data-astro-cid-yexifyue>70 min</span></span><span class="price-list__price" data-astro-cid-yexifyue>750 kr</span></div><div class="price-list__row" data-astro-cid-yexifyue><span class="price-list__label" data-astro-cid-yexifyue>Håndmassasje<span class="price-list__duration" data-astro-cid-yexifyue>tillegg, 15 min</span></span><span class="price-list__price" data-astro-cid-yexifyue>150 kr</span></div></div></div></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript></div></section></div><div id="galleri" data-astro-cid-26623dud><section class="section section--base section--divider-top section--divider-style-accent section--width-full section--align-left section--top-radius-none salon-gallery-section" data-astro-cid-w6ymvdtg><div class="section__inner" data-astro-cid-w6ymvdtg><div class="salon-gallery-intro salon-gallery-intro--dark" data-astro-cid-26623dud><div class="scroll-reveal scroll-reveal--bloom" data-astro-cid-vp2zbptk><h2 class="salon-heading" data-astro-cid-26623dud>Galleri</h2></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><div class="scroll-reveal scroll-reveal--bloom" style="animation-delay: 120ms" data-astro-cid-vp2zbptk><p class="salon-desc" data-astro-cid-26623dud>Et lite utvalg av arbeidet vårt — følg oss for flere.</p></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript></div><div class="mosaic-grid" style="--mosaic-columns: 3;" data-astro-cid-ydjbcveb><div class="scroll-reveal scroll-reveal--bloom mosaic-grid__reveal" data-astro-cid-vp2zbptk><div class="mosaic-tile mosaic-tile--label mosaic-tile--tone-0" data-astro-cid-ydjbcveb><span class="mosaic-tile__word" data-astro-cid-ydjbcveb>Manikyr</span></div></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><div class="scroll-reveal scroll-reveal--bloom mosaic-grid__reveal" style="animation-delay: 90ms" data-astro-cid-vp2zbptk><figure class="mosaic-tile mosaic-tile--photo" data-astro-cid-ydjbcveb><img class="mosaic-tile__image" src="/studio-negl/_astro/margarita-yutsaytis-olHWqqK7OVw-unsplash.BeLcF1Hb_1MdWvU.webp" alt="Blå ombre-negler med glitterdetalj" loading="lazy" data-astro-cid-ydjbcveb><div class="mosaic-tile__scrim" aria-hidden="true" data-astro-cid-ydjbcveb></div><figcaption class="mosaic-tile__caption" data-astro-cid-ydjbcveb><span class="mosaic-tile__caption-label" data-astro-cid-ydjbcveb>Gelelakk</span><span class="mosaic-tile__caption-meta" data-astro-cid-ydjbcveb>Ombre i blått</span></figcaption></figure></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><div class="scroll-reveal scroll-reveal--bloom mosaic-grid__reveal" style="animation-delay: 180ms" data-astro-cid-vp2zbptk><figure class="mosaic-tile mosaic-tile--photo" data-astro-cid-ydjbcveb><img class="mosaic-tile__image" src="/studio-negl/_astro/ellie-eshaghi-DtoWpHt2_d8-unsplash.CLCQvCPU_1W7zQ3.webp" alt="Ren, naturlig fransk manikyr" loading="lazy" data-astro-cid-ydjbcveb><div class="mosaic-tile__scrim" aria-hidden="true" data-astro-cid-ydjbcveb></div><figcaption class="mosaic-tile__caption" data-astro-cid-ydjbcveb><span class="mosaic-tile__caption-label" data-astro-cid-ydjbcveb>Fransk manikyr</span></figcaption></figure></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><div class="scroll-reveal scroll-reveal--bloom mosaic-grid__reveal" data-astro-cid-vp2zbptk><figure class="mosaic-tile mosaic-tile--photo" data-astro-cid-ydjbcveb><img class="mosaic-tile__image" src="/studio-negl/_astro/jung07011--4T7M75CLU4-unsplash.CbO9kaMP_QIQ5C.webp" alt="Pastellfargede negler i flere nyanser" loading="lazy" data-astro-cid-ydjbcveb><div class="mosaic-tile__scrim" aria-hidden="true" data-astro-cid-ydjbcveb></div><figcaption class="mosaic-tile__caption" data-astro-cid-ydjbcveb><span class="mosaic-tile__caption-label" data-astro-cid-ydjbcveb>Neglekunst</span><span class="mosaic-tile__caption-meta" data-astro-cid-ydjbcveb>Pastelltoner</span></figcaption></figure></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><div class="scroll-reveal scroll-reveal--bloom mosaic-grid__reveal" style="animation-delay: 90ms" data-astro-cid-vp2zbptk><figure class="mosaic-tile mosaic-tile--photo" data-astro-cid-ydjbcveb><img class="mosaic-tile__image" src="/studio-negl/_astro/chelson-tamares-vtQHwU4F13s-unsplash.BwrE5fWv_Z1msckU.webp" alt="Naturlig nude manikyr" loading="lazy" data-astro-cid-ydjbcveb><div class="mosaic-tile__scrim" aria-hidden="true" data-astro-cid-ydjbcveb></div><figcaption class="mosaic-tile__caption" data-astro-cid-ydjbcveb><span class="mosaic-tile__caption-label" data-astro-cid-ydjbcveb>Naturlig look</span></figcaption></figure></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><div class="scroll-reveal scroll-reveal--bloom mosaic-grid__reveal" style="animation-delay: 180ms" data-astro-cid-vp2zbptk><figure class="mosaic-tile mosaic-tile--photo" data-astro-cid-ydjbcveb><img class="mosaic-tile__image" src="/studio-negl/_astro/bryony-elena-tXwBDZS2JxQ-unsplash.DW6WVbZV_Z17Suao.webp" alt="Mørke negler i sort og skilpaddemønster" loading="lazy" data-astro-cid-ydjbcveb><div class="mosaic-tile__scrim" aria-hidden="true" data-astro-cid-ydjbcveb></div><figcaption class="mosaic-tile__caption" data-astro-cid-ydjbcveb><span class="mosaic-tile__caption-label" data-astro-cid-ydjbcveb>Mørk &amp; elegant</span><span class="mosaic-tile__caption-meta" data-astro-cid-ydjbcveb>For spesielle anledninger</span></figcaption></figure></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><div class="scroll-reveal scroll-reveal--bloom mosaic-grid__reveal" data-astro-cid-vp2zbptk><figure class="mosaic-tile mosaic-tile--photo" data-astro-cid-ydjbcveb><img class="mosaic-tile__image" src="/studio-negl/_astro/patricia-hellinger-Y14F-1vzVds-unsplash.Db_zziKi_Znckpj.webp" alt="Grå negler med glitterdetalj" loading="lazy" data-astro-cid-ydjbcveb><div class="mosaic-tile__scrim" aria-hidden="true" data-astro-cid-ydjbcveb></div><figcaption class="mosaic-tile__caption" data-astro-cid-ydjbcveb><span class="mosaic-tile__caption-label" data-astro-cid-ydjbcveb>Glitterdetalj</span></figcaption></figure></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><div class="scroll-reveal scroll-reveal--bloom mosaic-grid__reveal" style="animation-delay: 90ms" data-astro-cid-vp2zbptk><div class="mosaic-tile mosaic-tile--label mosaic-tile--tone-3" data-astro-cid-ydjbcveb><span class="mosaic-tile__word" data-astro-cid-ydjbcveb>Pedikyr</span></div></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><div class="scroll-reveal scroll-reveal--bloom mosaic-grid__reveal" style="animation-delay: 180ms" data-astro-cid-vp2zbptk><figure class="mosaic-tile mosaic-tile--photo" data-astro-cid-ydjbcveb><img class="mosaic-tile__image" src="/studio-negl/_astro/billie-5OXE3KjDEfI-unsplash.BUqDLp7K_ZvCaYY.webp" alt="Pedikyr i varme, naturlige toner" loading="lazy" data-astro-cid-ydjbcveb><div class="mosaic-tile__scrim" aria-hidden="true" data-astro-cid-ydjbcveb></div><figcaption class="mosaic-tile__caption" data-astro-cid-ydjbcveb><span class="mosaic-tile__caption-label" data-astro-cid-ydjbcveb>Klassisk pedikyr</span><span class="mosaic-tile__caption-meta" data-astro-cid-ydjbcveb>Varme, naturlige toner</span></figcaption></figure></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><div class="scroll-reveal scroll-reveal--bloom mosaic-grid__reveal" data-astro-cid-vp2zbptk><figure class="mosaic-tile mosaic-tile--photo" data-astro-cid-ydjbcveb><img class="mosaic-tile__image" src="/studio-negl/_astro/sq-lim-FsSg3fURJMI-unsplash.BWUyFxx6_1V5Cne.webp" alt="Fargerik pedikyr i grønt, blått og gult" loading="lazy" data-astro-cid-ydjbcveb><div class="mosaic-tile__scrim" aria-hidden="true" data-astro-cid-ydjbcveb></div><figcaption class="mosaic-tile__caption" data-astro-cid-ydjbcveb><span class="mosaic-tile__caption-label" data-astro-cid-ydjbcveb>Fargerik pedikyr</span><span class="mosaic-tile__caption-meta" data-astro-cid-ydjbcveb>Grønt, blått og gult</span></figcaption></figure></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><div class="scroll-reveal scroll-reveal--bloom mosaic-grid__reveal" style="animation-delay: 90ms" data-astro-cid-vp2zbptk><figure class="mosaic-tile mosaic-tile--photo" data-astro-cid-ydjbcveb><img class="mosaic-tile__image" src="/studio-negl/_astro/konstantin-shmatov-3sBC5KuClWE-unsplash.BuSAVIZY_UJj2o.webp" alt="Rosa pedikyr, tær strukket mot kamera" loading="lazy" data-astro-cid-ydjbcveb><div class="mosaic-tile__scrim" aria-hidden="true" data-astro-cid-ydjbcveb></div><figcaption class="mosaic-tile__caption" data-astro-cid-ydjbcveb><span class="mosaic-tile__caption-label" data-astro-cid-ydjbcveb>Rosa pedikyr</span><span class="mosaic-tile__caption-meta" data-astro-cid-ydjbcveb>Klassisk rosa lakk</span></figcaption></figure></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><div class="scroll-reveal scroll-reveal--bloom mosaic-grid__reveal" style="animation-delay: 180ms" data-astro-cid-vp2zbptk><figure class="mosaic-tile mosaic-tile--photo" data-astro-cid-ydjbcveb><img class="mosaic-tile__image" src="/studio-negl/_astro/konstantin-shmatov-WBuwkanEPiM-unsplash.NzTBlXYK_1gbvvi.webp" alt="Rosa pedikyr, kryssede føtter" loading="lazy" data-astro-cid-ydjbcveb><div class="mosaic-tile__scrim" aria-hidden="true" data-astro-cid-ydjbcveb></div><figcaption class="mosaic-tile__caption" data-astro-cid-ydjbcveb><span class="mosaic-tile__caption-label" data-astro-cid-ydjbcveb>Blank rosa</span><span class="mosaic-tile__caption-meta" data-astro-cid-ydjbcveb>Skinnende finish</span></figcaption></figure></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><div class="scroll-reveal scroll-reveal--bloom mosaic-grid__reveal" data-astro-cid-vp2zbptk><a class="mosaic-tile mosaic-tile--link mosaic-tile--tone-0" href="#" data-astro-cid-ydjbcveb><span class="mosaic-tile__link-label" data-astro-cid-ydjbcveb>Følg oss på Instagram</span><span class="mosaic-tile__arrow" aria-hidden="true" data-astro-cid-ydjbcveb><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-ydjbcveb><path d="M7 17 17 7M9 7h8v8" data-astro-cid-ydjbcveb></path></svg></span><svg class="mosaic-tile__border-reveal" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" data-astro-cid-ydjbcveb><path d="M50 98 L98 98 L98 2 L50 2" pathLength="100" data-astro-cid-ydjbcveb></path><path d="M50 98 L2 98 L2 2 L50 2" pathLength="100" data-astro-cid-ydjbcveb></path></svg></a></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><div class="scroll-reveal scroll-reveal--bloom mosaic-grid__reveal" style="animation-delay: 90ms" data-astro-cid-vp2zbptk><a class="mosaic-tile mosaic-tile--link mosaic-tile--tone-1" href="#" data-astro-cid-ydjbcveb><span class="mosaic-tile__link-label" data-astro-cid-ydjbcveb>Se flere bilder</span><span class="mosaic-tile__arrow" aria-hidden="true" data-astro-cid-ydjbcveb><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-ydjbcveb><path d="M7 17 17 7M9 7h8v8" data-astro-cid-ydjbcveb></path></svg></span><svg class="mosaic-tile__border-reveal" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" data-astro-cid-ydjbcveb><path d="M50 98 L98 98 L98 2 L50 2" pathLength="100" data-astro-cid-ydjbcveb></path><path d="M50 98 L2 98 L2 2 L50 2" pathLength="100" data-astro-cid-ydjbcveb></path></svg></a></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript></div></div></section></div><div id="om" data-astro-cid-26623dud><section class="section section--alt-1 section--divider-top section--divider-style-accent section--width-full section--align-left section--top-radius-none" data-astro-cid-w6ymvdtg><div class="section__inner" data-astro-cid-w6ymvdtg><section class="profile-section profile-section--photo" data-astro-cid-z2lwti7q><div class="profile-section__inner" data-astro-cid-z2lwti7q><div class="profile-section__portrait-col" data-astro-cid-z2lwti7q><div class="scroll-reveal scroll-reveal--bloom" data-astro-cid-vp2zbptk><img class="profile-section__photo" src="/studio-negl/_astro/jorik-kleen-lNNHyRbmm0o-unsplash.CK-3FMjH_Z1Drw3b.webp" alt="Maria Lund" data-astro-cid-z2lwti7q></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript></div><div class="profile-section__content" data-astro-cid-z2lwti7q><div class="scroll-reveal scroll-reveal--bloom" style="animation-delay: 120ms" data-astro-cid-vp2zbptk><p class="eyebrow eyebrow--plain" data-astro-cid-2lydxdhj><span class="eyebrow__label" data-astro-cid-2lydxdhj>Om studioet</span></p></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><div class="scroll-reveal scroll-reveal--bloom" style="animation-delay: 240ms" data-astro-cid-vp2zbptk><h2 class="profile-section__name" data-astro-cid-z2lwti7q>Maria Lund</h2></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><div class="scroll-reveal scroll-reveal--bloom" style="animation-delay: 360ms" data-astro-cid-vp2zbptk><p class="profile-section__role" data-astro-cid-z2lwti7q>Negletekniker / eier av Studio Negl</p></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><div class="scroll-reveal scroll-reveal--bloom" style="animation-delay: 480ms" data-astro-cid-vp2zbptk><div class="profile-section__bio-group" data-astro-cid-z2lwti7q><p class="profile-section__bio" data-astro-cid-z2lwti7q>Jeg har jobbet som negletekniker i over åtte år, og startet Studio Negl fordi jeg ønsket et rolig, personlig rom — uten stress, uten kø, bare god tid til hver kunde.</p><p class="profile-section__bio" data-astro-cid-z2lwti7q>Her får du presist håndverk i et minimalistisk lokale i sentrum, med fokus på hygiene, kvalitetsprodukter og et resultat som varer.</p></div></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><div class="scroll-reveal scroll-reveal--bloom" style="animation-delay: 600ms" data-astro-cid-vp2zbptk><ul class="profile-section__credentials" data-astro-cid-z2lwti7q><li data-astro-cid-z2lwti7q>Sertifisert negletekniker</li><li data-astro-cid-z2lwti7q>8+ års erfaring fra saloner i Oslo</li><li data-astro-cid-z2lwti7q>Kun én kunde av gangen — ingen dobbeltbooking</li></ul></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript></div></div></section></div></section></div><div id="tilbakemeldinger" data-astro-cid-26623dud><section class="testimonial-stack" data-testimonial-stack data-astro-cid-a5ino5h6><div class="testimonial-stack__inner" data-astro-cid-a5ino5h6><div class="testimonial-stack__head" data-astro-cid-a5ino5h6><p class="testimonial-stack__eyebrow" data-astro-cid-a5ino5h6>Kundene sier</p><h2 class="testimonial-stack__title" data-astro-cid-a5ino5h6>Hva andre opplever</h2><div class="testimonial-stack__divider" aria-hidden="true" data-astro-cid-a5ino5h6></div><div class="testimonial-stack__nav" data-astro-cid-a5ino5h6><button type="button" class="testimonial-stack__arrow" data-stack-prev aria-label="Forrige" data-astro-cid-a5ino5h6>←</button><div class="testimonial-stack__dots" role="tablist" data-astro-cid-a5ino5h6><button type="button" class="testimonial-stack__dot" role="tab" aria-label="Vis anmeldelse 1" aria-selected="true" data-stack-dot="0" data-astro-cid-a5ino5h6></button><button type="button" class="testimonial-stack__dot" role="tab" aria-label="Vis anmeldelse 2" aria-selected="false" data-stack-dot="1" data-astro-cid-a5ino5h6></button><button type="button" class="testimonial-stack__dot" role="tab" aria-label="Vis anmeldelse 3" aria-selected="false" data-stack-dot="2" data-astro-cid-a5ino5h6></button></div><button type="button" class="testimonial-stack__arrow" data-stack-next aria-label="Neste" data-astro-cid-a5ino5h6>→</button></div></div><div class="testimonial-stack__deck" data-astro-cid-a5ino5h6><article class="testimonial-stack__card" data-stack-card="0" data-stack-position="active" aria-hidden="false" data-astro-cid-a5ino5h6><p class="testimonial-stack__stars" aria-hidden="true" data-astro-cid-a5ino5h6>★★★★★</p><p class="testimonial-stack__quote" data-astro-cid-a5ino5h6>Endelig en salong uten stress og venting. Maria tar seg god tid, og resultatet sitter i ukevis. Kommer garantert tilbake.</p><div class="testimonial-stack__sig" data-astro-cid-a5ino5h6><span class="testimonial-stack__monogram" aria-hidden="true" data-astro-cid-a5ino5h6>EK</span><span class="testimonial-stack__name" data-astro-cid-a5ino5h6>Emma Kristiansen</span></div></article><article class="testimonial-stack__card" data-stack-card="1" data-stack-position="next" aria-hidden="true" data-astro-cid-a5ino5h6><p class="testimonial-stack__stars" aria-hidden="true" data-astro-cid-a5ino5h6>★★★★★</p><p class="testimonial-stack__quote" data-astro-cid-a5ino5h6>Rolig, ryddig og utrolig presist håndverk. Jeg har aldri hatt så pene negler — og lokalet i seg selv er en opplevelse.</p><div class="testimonial-stack__sig" data-astro-cid-a5ino5h6><span class="testimonial-stack__monogram" aria-hidden="true" data-astro-cid-a5ino5h6>TB</span><span class="testimonial-stack__name" data-astro-cid-a5ino5h6>Thea Berg</span></div></article><article class="testimonial-stack__card" data-stack-card="2" data-stack-position="prev" aria-hidden="true" data-astro-cid-a5ino5h6><p class="testimonial-stack__stars" aria-hidden="true" data-astro-cid-a5ino5h6>★★★★★</p><p class="testimonial-stack__quote" data-astro-cid-a5ino5h6>Det som gjør Studio Negl til favoritten min er at man aldri føler seg som nummer i køen. Kun én kunde av gangen merkes virkelig.</p><div class="testimonial-stack__sig" data-astro-cid-a5ino5h6><span class="testimonial-stack__monogram" aria-hidden="true" data-astro-cid-a5ino5h6>IS</span><span class="testimonial-stack__name" data-astro-cid-a5ino5h6>Ingrid Solheim</span></div></article></div></div></section><script type="module">document.querySelectorAll(`[data-testimonial-stack]`).forEach(e=>{let t=Array.from(e.querySelectorAll(`[data-stack-card]`)),n=Array.from(e.querySelectorAll(`[data-stack-dot]`)),r=t.length;if(r<2)return;let i=0;function a(){t.forEach((e,t)=>{let n=t-i;n>r/2&&(n-=r),n<-r/2&&(n+=r);let a=n===0?`active`:n===-1?`prev`:n===1?`next`:`hidden`;e.dataset.stackPosition=a,e.setAttribute(`aria-hidden`,a===`active`?`false`:`true`)}),n.forEach((e,t)=>e.setAttribute(`aria-selected`,t===i?`true`:`false`))}function o(e){i=(e%r+r)%r,a()}e.querySelector(`[data-stack-prev]`)?.addEventListener(`click`,()=>o(i-1)),e.querySelector(`[data-stack-next]`)?.addEventListener(`click`,()=>o(i+1)),n.forEach((e,t)=>e.addEventListener(`click`,()=>o(t))),t.forEach((e,t)=>e.addEventListener(`click`,()=>o(t))),a()});</script></div><div id="book" data-astro-cid-26623dud><section class="section section--alt-1 section--divider-top section--divider-style-accent section--width-default section--align-center section--top-radius-none salon-book-section" data-astro-cid-w6ymvdtg><div class="section__inner" data-astro-cid-w6ymvdtg><div class="scroll-reveal scroll-reveal--bloom" data-astro-cid-vp2zbptk><div class="inline-cta-banner inline-cta-banner--center" data-astro-cid-fzzqim4j><div class="inline-cta-banner__text" data-astro-cid-fzzqim4j><p class="eyebrow eyebrow--plain" data-astro-cid-2lydxdhj><span class="eyebrow__label" data-astro-cid-2lydxdhj>Bestill time</span></p><p class="inline-cta-banner__message" data-astro-cid-fzzqim4j>Send oss en DM på Instagram eller ring oss — vi bekrefter tid raskt.</p></div><div class="inline-cta-banner__actions" data-astro-cid-fzzqim4j><div class="scroll-reveal scroll-reveal--bloom" style="animation-delay: 700ms" data-astro-cid-vp2zbptk><a class="button button--primary button--lg  " href="https://instagram.com" target="_blank" rel="noopener noreferrer" data-astro-cid-fzzqim4j="true" data-astro-cid-ekguhzzh="true"><span class="button__icon button__icon--left" aria-hidden="true" data-astro-cid-ekguhzzh><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-26623dud><path d="M3 9.4c0-2.24 0-3.36.436-4.216a4 4 0 0 1 1.748-1.748C6.04 3 7.16 3 9.4 3h5.2c2.24 0 3.36 0 4.216.436a4 4 0 0 1 1.748 1.748C21 6.04 21 7.16 21 9.4v5.2c0 2.24 0 3.36-.436 4.216a4 4 0 0 1-1.748 1.748C17.96 21 16.84 21 14.6 21H9.4c-2.24 0-3.36 0-4.216-.436a4 4 0 0 1-1.748-1.748C3 17.96 3 16.84 3 14.6zm14-2.9h.5" data-astro-cid-26623dud></path><path d="M15.462 11.487a3.5 3.5 0 1 1-6.925 1.026a3.5 3.5 0 0 1 6.925-1.026" data-astro-cid-26623dud></path></svg></span><span class="button__label" data-astro-cid-ekguhzzh>Send DM på Instagram</span><svg class="button__border-reveal" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" data-astro-cid-ekguhzzh><path d="M50 98 L98 98 L98 2 L50 2" pathLength="100" data-astro-cid-ekguhzzh></path><path d="M50 98 L2 98 L2 2 L50 2" pathLength="100" data-astro-cid-ekguhzzh></path></svg></a></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript><div class="scroll-reveal scroll-reveal--bloom" style="animation-delay: 950ms" data-astro-cid-vp2zbptk><a class="button button--outline button--lg  " href="tel:+4791234567" data-astro-cid-fzzqim4j="true" data-astro-cid-ekguhzzh="true"><span class="button__label" data-astro-cid-ekguhzzh>912 34 567</span><svg class="button__border-reveal" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" data-astro-cid-ekguhzzh><path d="M50 98 L98 98 L98 2 L50 2" pathLength="100" data-astro-cid-ekguhzzh></path><path d="M50 98 L2 98 L2 2 L50 2" pathLength="100" data-astro-cid-ekguhzzh></path></svg></a></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript></div></div></div><!--
+  `style="display: none"` is load-bearing, not decoration: <noscript> is
+  still a real element in the box tree (its content is only inert text
+  while scripting is on, the element itself isn't display:none by
+  default), so an unhidden one sitting right next to `.scroll-reveal` in
+  markup becomes an extra flex/grid item wherever ScrollReveal is used
+  inside a grid (MosaicGrid's `reveal`) or flex row (SplitScreenHero's
+  `reveal`) — doubling the item count and shifting every real item after
+  the first into the wrong track/column. Hidden, it still parses fine
+  and applies its rule the one time it matters (scripting off).
+--><noscript style="display: none"><style>
+    .scroll-reveal {
+      opacity: 1 !important;
+    }
+  </style></noscript></div></section></div><footer class="site-footer site-footer--solid site-footer--layout-minimal salon-footer" data-astro-cid-nns7i3if><div class="site-footer__bottom" data-astro-cid-nns7i3if><p class="site-footer__brand-name site-footer__brand-name--inline" data-astro-cid-nns7i3if>Studio Negl</p><p data-astro-cid-nns7i3if>© 2026 Studio Negl · Oslo</p><ul class="site-footer__legal" data-astro-cid-nns7i3if><li data-astro-cid-nns7i3if><a href="#" data-astro-cid-nns7i3if>Personvern</a></li></ul></div></footer></body></html>
